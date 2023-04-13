@@ -4,7 +4,7 @@ A Simple CUDA program to demonstrate how using different CUDA gencode arguments 
 
 ## Gencodes
 
-CUDA's [two-stage compilation process](https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html#virtual-architectures) requires a *virtual architecture* and a *real architecture* to target the CUDA architecture to compile for. 
+CUDA's [two-stage compilation process](https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html#virtual-architectures) requires a *virtual architecture* and a *real architecture* to target the CUDA architecture to compile for.
 
 There are many ways to specify these flags to nvcc, but for simplicity this will just use the combined `-gencode` flag.
 
@@ -40,6 +40,18 @@ $ nvcc main.cu -o main -gencode=arch=compute_70,code=sm_70 -gencode=arch=compute
 $ ./main 
 Compiled with nvcc 12.1.66
 __CUDA_ARCH_LIST__ 700
+GPU 0: sm_86 NVIDIA GeForce RTX 3060 Ti
+Hello from thread 0
+```
+
+Compiling without specifying any gencodes, will the oldest non-deprecated arch supported by the CUDA version, but will embed PTX resulting in usable but potentially less-optimised code.
+
+
+```console
+$ nvcc main.cu -o main
+$ ./main 
+Compiled with nvcc 12.1.66
+__CUDA_ARCH_LIST__ 520
 GPU 0: sm_86 NVIDIA GeForce RTX 3060 Ti
 Hello from thread 0
 ```
