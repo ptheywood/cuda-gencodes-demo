@@ -2,8 +2,8 @@
 #include <cuda_runtime.h>
 
 // Macros to enable printf of a string macro values
+#define str(s...) #s
 #define xstr(s) (str(s))
-#define str(s) #s
 
 /**
  * Kernel which just print's a message from thread 0, just to demonstrate device code executed,.
